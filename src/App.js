@@ -2,6 +2,7 @@ import './App.css';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import { useState } from 'react';
 import featuresData from './featuresData.js'
+import { Routes, Route, Link } from 'react-router-dom'
 
 function App() {
 
@@ -9,25 +10,33 @@ function App() {
 
   return (
     <div className="App">
+
       <Navbar bg="light" variant="light">
         <Container>
           <Navbar.Brand href="#home">Mero's mall</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Cart</Nav.Link>
+            <Link to="/">Home</Link>
+            <Link to="/detail">Detail</Link>
           </Nav>
         </Container>
       </Navbar>
-
-      <div className="main-bg"></div>
-
-      <Features shoes={shoes} />
-
+      
+      // 7/23 router 관련 숙제부터 하자
+      <Routes>
+        <Route path="/" element={
+          <>
+            <div className="main-bg"></div>
+            <Cart shoes={shoes} />
+          </>
+        } />
+        <Route path="/detail" element={<div>Detail Page</div>} />
+      </Routes>
+      
     </div>
   );
 }
 
-const Features = (props) => {
+const Cart = (props) => {
 
   const imgURL = "https://codingapple1.github.io/shop/shoes";
 
